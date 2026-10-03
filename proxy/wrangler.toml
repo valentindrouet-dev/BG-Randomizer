@@ -1,0 +1,7 @@
+name = "bgg-proxy"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+# Optionnel : limiter l'accès à l'adresse de ton appli
+# [vars]
+# ALLOWED_ORIGIN = "https://valentindrouet-dev.github.io"

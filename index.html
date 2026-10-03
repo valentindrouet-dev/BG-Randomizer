@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Roulette à jeux</title>
+  <meta name="theme-color" content="#123f2a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Roulette">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>🎲 Roulette</h1>
+    <button id="btn-settings" class="icon-btn" aria-label="Réglages">⚙️</button>
+  </header>
+
+  <main>
+    <section class="filters" aria-label="Critères">
+      <div class="row">
+        <span class="row-label">👥</span>
+        <div class="chips" data-filter="players">
+          <button data-v="1">1</button>
+          <button data-v="2">2</button>
+          <button data-v="3">3</button>
+          <button data-v="4">4</button>
+          <button data-v="5">5</button>
+          <button data-v="6">6+</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-label">⏱️</span>
+        <div class="chips" data-filter="duration">
+          <button data-v="short">-30′</button>
+          <button data-v="mid">1h</button>
+          <button data-v="long">2h</button>
+          <button data-v="xl">2h+</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-label">📅</span>
+        <div class="chips" data-filter="recent">
+          <button data-v="recent">Récent</button>
+          <button data-v="old">Pas récent</button>
+          <button data-v="never">Jamais</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-label">🧠</span>
+        <div class="chips" data-filter="weight">
+          <button data-v="light">Léger</button>
+          <button data-v="medium">Moyen</button>
+          <button data-v="heavy">Costaud</button>
+        </div>
+      </div>
+      <div class="row">
+        <span class="row-label">🎭</span>
+        <div class="chips" data-filter="style" data-multi="1">
+          <button data-v="strategy">♟️ Stratégie</button>
+          <button data-v="family">🏡 Famille</button>
+          <button data-v="party">🎉 Ambiance</button>
+          <button data-v="coop">🤝 Coop</button>
+          <button data-v="thematic">🐉 Thème</button>
+          <button data-v="cards">🃏 Cartes</button>
+          <button data-v="abstract">🔷 Abstrait</button>
+          <button data-v="kids">🧸 Enfants</button>
+        </div>
+      </div>
+      <button id="btn-reset" class="ghost-btn">✖ Tout effacer</button>
+    </section>
+
+    <section class="wheel-zone">
+      <div class="wheel-wrap">
+        <div class="pointer" aria-hidden="true"></div>
+        <canvas id="wheel" width="640" height="640" aria-label="Roulette"></canvas>
+      </div>
+      <button id="btn-spin" class="spin-btn">LANCER</button>
+      <p id="pool-count" class="pool-count"></p>
+    </section>
+
+    <section id="result" class="result" hidden>
+      <div class="pick pick-1">
+        <span class="badge">1</span>
+        <img id="r1-img" alt="">
+        <h2 id="r1-name"></h2>
+        <p id="r1-meta" class="meta"></p>
+      </div>
+      <div class="pick pick-2">
+        <span class="badge">2</span>
+        <img id="r2-img" alt="">
+        <div>
+          <h3 id="r2-name"></h3>
+          <p id="r2-meta" class="meta"></p>
+        </div>
+      </div>
+      <button id="btn-play" class="play-btn">✅ On y joue !</button>
+    </section>
+  </main>
+
+  <dialog id="settings">
+    <form method="dialog" class="sheet">
+      <h2>⚙️ Réglages</h2>
+
+      <label class="field">
+        <span>Pseudo BGG</span>
+        <input id="in-user" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="pseudo">
+      </label>
+
+      <details>
+        <summary>🔑 Accès API</summary>
+        <label class="field">
+          <span>Proxy</span>
+          <input id="in-proxy" type="url" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="https://…workers.dev">
+        </label>
+        <label class="field">
+          <span>Jeton BGG</span>
+          <input id="in-token" autocapitalize="off" spellcheck="false" placeholder="si pas de proxy">
+        </label>
+      </details>
+
+      <button type="button" id="btn-sync" class="big-btn green">🔄 Synchroniser</button>
+      <p id="sync-status" class="status"></p>
+      <button type="button" id="btn-demo" class="big-btn light">🎁 Jeux exemples</button>
+      <button value="close" class="big-btn orange">Fermer</button>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
